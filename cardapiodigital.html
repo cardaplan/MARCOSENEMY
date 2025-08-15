@@ -170,25 +170,26 @@
         }
         
         body { font-family: 'Inter', sans-serif; }
+        .category-item.active { box-shadow: 0 6px 16px rgba(234, 29, 44, 0.25); transform: translateY(-1px); background: var(--cor-primaria); color: var(--cor-texto-branco); }
         
-        .category-nav {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--cor-borda);
-        }
+                    .category-nav {
+                backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.90);
+                border-bottom: 1px solid var(--cor-borda);
+            }
         
         /* Ajuste de posicionamento para mobile */
         @media (max-width: 768px) {
             .category-nav {
-                top: 88px !important;
+                top: 104px !important;
             }
         }
         
         /* Melhorar renderização no desktop */
         @media (min-width: 769px) {
             .category-nav {
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(8px);
+                background: rgba(255, 255, 255, 0.92);
+                backdrop-filter: blur(10px);
             }
         }
         
@@ -242,22 +243,23 @@
             min-width: 40px;
             height: 40px;
             padding: 0 12px;
-            border-radius: 20px;
-            border: 1px solid #cbd5e1;
-            background: #f8fafc;
-            color: #64748b;
+            border-radius: 9999px;
+            border: 1px solid #e5e7eb;
+            background: rgba(255,255,255,0.9);
+            color: #334155;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         
         .search-button:hover {
-            background: #e2e8f0;
-            border-color: #94a3b8;
-            color: #475569;
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #1f2937;
         }
         
         .search-button:active {
-            background: #cbd5e1;
+            background: #f1f5f9;
         }
         
         /* Responsividade para o botão de busca */
@@ -266,6 +268,7 @@
                 min-width: 36px;
                 height: 36px;
                 padding: 0 10px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             }
         }
         
@@ -344,7 +347,6 @@
                 margin: 0 -20px -20px -20px;
             }
         }
-        
         .slide-up {
             animation: slideUp 0.3s ease-out;
         }
@@ -661,10 +663,6 @@
         
      
     </style>
-
-
-
-  
 </head>
 <body style="background-color: var(--cor-fundo) !important;">
 
@@ -672,23 +670,24 @@
    
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-40">
+    <header class="sticky top-0 z-40 relative overflow-hidden text-white shadow-lg rounded-b-3xl md:rounded-b-[28px]" style="background: var(--gradiente-secundario);">
+        <div class="absolute inset-0 pointer-events-none opacity-20" style="background: radial-gradient(600px 200px at -10% 0%, rgba(255,255,255,0.6), transparent 60%), radial-gradient(500px 180px at 110% 100%, rgba(255,255,255,0.4), transparent 60%);"></div>
         <div class="max-w-4xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity" onclick="window.location.reload()" title="Recarregar página">
-                    <img id="header-logo" src="" alt="Logo" class="object-cover rounded-lg cursor-pointer" style="display: none; width: 55px; height: 55px;" onerror="this.style.display='none'" onclick="clearStorageAndReload()" title="Clique para limpar cache e recarregar">
+                    <img id="header-logo" src="" alt="Logo" class="object-cover rounded-lg cursor-pointer ring-2 ring-white/80 ring-offset-2 ring-offset-white/10 shadow-md" style="display: none; width: 58px; height: 58px;" onerror="this.style.display='none'" onclick="clearStorageAndReload()" title="Clique para limpar cache e recarregar">
                     <div>
-                        <h1 id="header-company-name" class="text-base sm:text-2xl font-bold" style="color: var(--cor-primaria) !important;">Cardápio Digital</h1>
-                        <p id="header-slogan" class="text-xs sm:text-base" style="color: var(--cor-texto) !important;" >Slogan da Empresa</p>
+                        <h1 id="header-company-name" class="text-base sm:text-2xl font-extrabold tracking-tight drop-shadow-sm">Cardápio Digital</h1>
+                        <p id="header-slogan" class="text-xs sm:text-base text-white/90">Slogan da Empresa</p>
                     </div>
-                </div>
+                                </div>
                 <div class="flex items-center space-x-3">
-                    <div class="text-right cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors" onclick="openHoursModal()" id="hours-indicator" style="font-size: 0.85rem;">
+                    <div class="text-right cursor-pointer p-2 rounded-xl transition-all backdrop-blur-sm bg-white/10 hover:bg-white/20 ring-1 ring-white/30" onclick="openHoursModal()" id="hours-indicator" style="font-size: 0.85rem;">
                         <div class="flex items-center space-x-2">
-                            <div id="status-dot" class="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <div class="font-medium" style="color: var(--cor-secundaria) !important;" id="status-text">Aberto</div>
+                            <div id="status-dot" class="w-2 h-2 bg-green-400 rounded-full shadow-[0_0_0_3px_rgba(255,255,255,0.35)]"></div>
+                            <div class="font-semibold text-white" id="status-text">Aberto</div>
                         </div>
-                        <div style="color: var(--cor-texto) !important;" id="hours-text">até 23h</div>
+                        <div class="text-white/80" id="hours-text">até 23h</div>
                     </div>
                 </div>
             </div>
@@ -697,23 +696,23 @@
     </header>
 
     <!-- Categories Navigation -->
-    <nav class="category-nav fixed top-[89px] left-0 right-0 z-30 bg-white" style="border-bottom: 1px solid var(--cor-borda) !important;">
+    <nav class="category-nav fixed left-0 right-0 z-30 bg-white/90 backdrop-blur-md" style="border-bottom: 1px solid var(--cor-borda) !important;">
         <div class="max-w-4xl mx-auto px-4 py-3">
             <div class="relative flex items-center">
                 <!-- Seta Esquerda (Desktop apenas) -->
-                <button id="nav-arrow-left" class="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-50 transition-all duration-200 mr-2 z-10 nav-arrow" style="opacity: 0; pointer-events: none;">
+                <button id="nav-arrow-left" class="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition-transform duration-200 mr-2 z-10 nav-arrow" style="opacity: 0; pointer-events: none;">
                     <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
                 
                 <!-- Container das categorias -->
-                <div class="flex space-x-2 overflow-x-auto scrollbar-hide flex-1" id="category-nav">
+                <div class="flex space-x-2 overflow-x-auto scrollbar-hide flex-1" id="category-nav" style="scroll-snap-type: x mandatory;">
                     <!-- Categories will be populated dynamically from CSV data -->
                 </div>
                 
                 <!-- Seta Direita (Desktop apenas) -->
-                <button id="nav-arrow-right" class="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-50 transition-all duration-200 ml-2 z-10 nav-arrow">
+                <button id="nav-arrow-right" class="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition-transform duration-200 ml-2 z-10 nav-arrow">
                     <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -723,19 +722,22 @@
     </nav>
 
     <!-- Menu Content -->
-    <main class="max-w-4xl mx-auto px-4 py-6 pb-4 mt-[80px]">
+    <main class="max-w-4xl mx-auto px-4 py-6 pb-4 mt-[104px]">
         <!-- Search -->
         <div class="mb-6">
             <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
                 <input type="text" id="search" placeholder="Buscar..." autocomplete="off" 
-                       class="w-full pl-4 pr-20 py-3 rounded-lg focus:ring-2 focus:border-transparent" style="border: 1px solid var(--cor-borda) !important; --tw-ring-color: var(--cor-primaria) !important;">
+                       class="w-full pl-9 pr-20 py-3 rounded-xl focus:ring-2 focus:border-transparent shadow-sm placeholder:text-gray-400" style="border: 1px solid var(--cor-borda) !important; --tw-ring-color: var(--cor-primaria) !important;">
                 <div class="absolute right-2 top-2 flex space-x-2">
                     <button id="clear-search" onclick="clearSearch()" class="hidden rounded-full w-8 h-8 flex items-center justify-center transition-colors" style="background-color: var(--cor-fundo-secundario) !important; color: var(--cor-texto-secundario) !important;" title="Limpar busca" onmouseover="this.style.backgroundColor='var(--cor-borda)'" onmouseout="this.style.backgroundColor='var(--cor-fundo-secundario)'">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
-                    <button id="search-btn" onclick="performSearch()" class="rounded-full w-8 h-8 flex items-center justify-center transition-colors" style="background-color: var(--cor-primaria) !important; color: white !important;" title="Pesquisar" onmouseover="this.style.backgroundColor='var(--cor-primaria-hover)'" onmouseout="this.style.backgroundColor='var(--cor-primaria)'">
+                    <button id="search-btn" onclick="performSearch()" class="rounded-full w-8 h-8 flex items-center justify-center transition-colors shadow-sm" style="background-color: var(--cor-primaria) !important; color: white !important;" title="Pesquisar" onmouseover="this.style.backgroundColor='var(--cor-primaria-hover)'" onmouseout="this.style.backgroundColor='var(--cor-primaria)'">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
@@ -992,7 +994,6 @@
             </div>
         </div>
     </div>
-
     <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50" onclick="closeCheckout(event)">
         <div class="flex items-start justify-center min-h-screen p-4 pt-8">
@@ -1657,7 +1658,6 @@
             
             return data;
         }
-
         // Function to load CSV data
         async function loadCSVData(url) {
             try {
@@ -1990,7 +1990,6 @@
                         label2: parts[2] ? parts[2].trim() : ''
                     };
                 }
-
                 // Configure local option (step2_opc1)
                 if (localOption) {
                     const config = parseOptionConfig(checkoutConfig.step2_opc1);
@@ -2316,7 +2315,6 @@
             // Se não se encaixa em nenhum padrão conhecido, assumir como chave aleatória
             return 'aleatoria';
         }
-
         function formatPixKey(pixKey, type) {
             const cleanKey = pixKey.trim();
             
@@ -2648,7 +2646,6 @@
                          onerror="if (typeof warnLog === 'function') warnLog('❌ Logo do preloader falhou ao carregar:', '${logoURL}'); this.parentElement.style.display='none';" 
                          onload="if (typeof debugLog === 'function') debugLog('✅ Logo do preloader carregado com sucesso'); this.style.opacity='1';">
                 </div>` : '';
-            
             const preloaderHTML = `
                 <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
                     <div class="text-center">
@@ -3256,7 +3253,6 @@
                 /^(#[^:]+:|~Var:\s*[^:]+:|Var:\s*[^:]+:)(radio|checkbox):/.test(line) ||
                 /maxselect=\d+:/.test(line)
             );
-            
             debugLog('🆕 Tem padrão novo formato?', hasNewFormatPattern);
             
             if (hasNewFormatPattern) {
@@ -3475,7 +3471,7 @@
 
             // Add search button (lupa) first
             let html = `
-                <button class="category-item search-button" data-action="search" title="Buscar produtos">
+                <button class="category-item search-button bg-white/90 hover:bg-white text-gray-700 shadow-sm" data-action="search" title="Buscar produtos">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
@@ -3484,8 +3480,8 @@
 
             // Add category buttons
             html += sortedCategories.map(category => `
-                <button class="category-item px-4 py-2 rounded-full text-sm font-medium border border-gray-300 transition-colors" 
-                        data-category="${category.nome_categoria}">
+                <button class="category-item px-4 py-2 rounded-full text-sm font-semibold border border-gray-200 bg-white/80 hover:bg-white hover:border-gray-300 text-gray-700 shadow-sm" 
+                        data-category="${category.nome_categoria}" style="scroll-snap-align: start;">
                     ${category.titulo_exibicao}
                 </button>
             `).join('');
@@ -3608,7 +3604,6 @@
                 });
             });
         }
-
         // Render menu sections
         function renderMenu() {
             const container = document.getElementById('menu-content');
@@ -3946,7 +3941,6 @@
             // Inicializar botões de limpar seleção
             setTimeout(toggleClearButtons, 200);
         }
-
         // Handle variation change (formato legado)
         function handleVariationChange(index, name, price, isRequired) {
             debugLog('🔧 handleVariationChange chamada:', { index, name, price, isRequired });
@@ -4610,7 +4604,6 @@
             if (typeof debugLog === 'function') {
                 debugLog('😫 Scroll disabled during cart modal');
             }
-            
             modal.classList.remove('hidden');
         }
         // Close cart
@@ -4939,7 +4932,6 @@
                 }, 500); // Aguardar 500ms para garantir que os campos foram renderizados
             }
         }
-
         // Limpa estado e UI de forma de pagamento (quando usuário volta do Step 3)
         function resetPaymentState() {
             try {
@@ -5873,7 +5865,7 @@
                         if (typeof bairroSelectEnabled !== 'undefined' && bairroSelectEnabled) {
                             bairroWrapper.innerHTML = `<select id=\"neighborhood\" class=\"w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus-border-transparent\" onchange=\"updateAddressData(); clearFieldError('neighborhood'); buscarTaxaPorBairroRedundante(this.value, true);\"><option value=\"\">Selecione...</option></select>`;
                         } else {
-                            bairroWrapper.innerHTML = `<input type=\"text\" id=\"neighborhood\" class=\"w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus-ring-red-500 focus-border-transparent\" placeholder=\"Seu bairro\" autocomplete=\"off\" oninput=\"updateAddressData(); clearFieldError('neighborhood'); buscarTaxaPorBairroRedundante(this.value, true);\" onchange=\"updateContinueButton();\" onblur=\"updateContinueButton();\">`;
+                            bairroWrapper.innerHTML = `<input type=\"text\" id=\"neighborhood\" class=\"w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus-border-transparent\" placeholder=\"Seu bairro\" autocomplete=\"off\" oninput=\"updateAddressData(); clearFieldError('neighborhood'); buscarTaxaPorBairroRedundante(this.value, true);\" onchange=\"updateContinueButton();\" onblur=\"updateContinueButton();\">`;
                         }
                     }
                 }
@@ -6302,334 +6294,6 @@
                 }, 200);
             }
         }
-        
-
-
-        // Simple validation functions - only called when needed
-        function validateTableNumber() {
-            const tableNumber = document.getElementById('table-number')?.value.trim();
-            if (!tableNumber) {
-                showFieldError('table-number', 'Informe o número da mesa ou comanda');
-                return false;
-            }
-            return true;
-        }
-        
-        function validateAddressNumber() {
-            const number = document.getElementById('number')?.value.trim();
-            if (!number) {
-                showFieldError('number', 'Número do endereço é obrigatório');
-                return false;
-            }
-            return true;
-        }
-        
-        function validateCustomerName() {
-            const name = document.getElementById('customer-name')?.value.trim();
-            if (!name) {
-                showFieldError('customer-name', 'Nome completo é obrigatório');
-                return false;
-            }
-            if (name.length < 2) {
-                showFieldError('customer-name', 'Nome deve ter pelo menos 2 caracteres');
-                return false;
-            }
-            return true;
-        }
-        
-        function validatePaymentMethod() {
-            const checkoutConfig = getCheckoutConfig();
-            
-            // Check if payment methods are enabled
-            if (checkoutConfig.step3_show_formas_pag !== 'Sim') {
-                return true; // Skip validation if payment methods are disabled
-            }
-            
-            // Define delivery types that should validate payment methods
-            const deliveryTypesWithPayment = ['pickup', 'delivery', 'default'];
-            if (!deliveryTypesWithPayment.includes(orderData.deliveryType)) {
-                return true; // Skip validation for delivery types without payment
-            }
-            
-            const paymentMethod = document.getElementById('payment-method')?.value;
-            if (!paymentMethod) {
-                showFieldError('payment-method', 'Selecione a forma de pagamento');
-                return false;
-            }
-            return true;
-        }
-        
-        /**
-         * Calcula o total do carrinho
-         */
-        function calculateCartTotal() {
-            return cart.reduce((sum, item) => {
-                const price = typeof parsePrice === 'function' ? parsePrice(item.preco) : parseFloat(String(item.preco).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
-                return price > 0 ? sum + (price * item.quantity) : sum;
-            }, 0);
-        }
-        
-        // Atualizar total do pedido no Step 3 (checkout) - MODIFICADO PARA CUPONS
-        function updateCheckoutOrderTotal() {
-            const totalElement = document.getElementById('checkout-order-total');
-            if (totalElement) {
-                const cartTotal = calculateCartTotal();
-                const deliveryFee = (orderData && orderData.deliveryType === 'delivery')
-                    ? ((orderData.address && typeof orderData.address.deliveryFee !== 'undefined')
-                        ? orderData.address.deliveryFee
-                        : (typeof currentDeliveryFee !== 'undefined' && currentDeliveryFee !== null ? currentDeliveryFee : 0))
-                    : 0;
-                let finalTotal = cartTotal + deliveryFee;
-                
-                // Aplicar desconto do cupom se houver
-                if (appliedCoupon && couponDiscount > 0) {
-                    finalTotal = Math.max(0, finalTotal - couponDiscount);
-                }
-                
-                debugLog('=== ATUALIZANDO TOTAL DO CHECKOUT ===');
-                debugLog('Subtotal carrinho:', formatCurrency(cartTotal));
-                debugLog('Taxa de delivery:', formatCurrency(deliveryFee));
-                debugLog('Desconto cupom:', formatCurrency(couponDiscount));
-                debugLog('Total final:', formatCurrency(finalTotal));
-                
-                // Atualizar total final (sempre limpo)
-                totalElement.textContent = formatCurrency(finalTotal);
-                
-                // Atualizar novo resumo limpo
-                updateOrderSummary(cartTotal, deliveryFee);
-            }
-        }
-        
-        // ===== SISTEMA DE CUPONS =====
-        
-        /**
-         * Verifica se todos os itens no carrinho são do tipo "consulte preço"
-         * @returns {boolean} True se todos os itens forem do tipo "consulte preço"
-         */
-        function hasOnlyConsultPriceItems() {
-            // Se o carrinho estiver vazio, retorna false
-            if (cart.length === 0) return false;
-            
-            // Verifica se todos os itens têm preço zero ou null/undefined
-            return cart.every(item => {
-                return item.preco === 0 || item.preco === null || item.preco === undefined || isNaN(item.preco);
-            });
-        }
-        
-        // Atualizar resumo do pedido - NOVA VERSÃO LIMPA
-        function updateOrderSummary(cartTotal, deliveryFee) {
-            // Elementos do novo layout
-            const subtotalElement = document.getElementById('order-subtotal');
-            const deliveryRow = document.getElementById('delivery-row');
-            const deliveryFeeElement = document.getElementById('order-delivery-fee');
-            const discountRow = document.getElementById('discount-row');
-            const discountLabelElement = document.getElementById('discount-label');
-            const discountElement = document.getElementById('order-discount');
-            const orderSummaryBlock = document.querySelector('.bg-white.border.border-gray-200.rounded-lg.shadow-sm.p-4.mb-4');
-            
-            if (!subtotalElement) return;
-            
-            // Verifica se todos os produtos são do tipo "consulte preço"
-            const onlyConsultItems = hasOnlyConsultPriceItems();
-            
-            // Se todos os produtos forem do tipo "consulte preço", oculta o bloco de resumo
-            if (onlyConsultItems && orderSummaryBlock) {
-                orderSummaryBlock.classList.add('hidden');
-                debugLog('Resumo do pedido ocultado: todos os produtos são do tipo "consulte preço"');
-                return;
-            } else if (orderSummaryBlock) {
-                orderSummaryBlock.classList.remove('hidden');
-            }
-            
-            // 1. SUBTOTAL (sempre visível)
-            subtotalElement.textContent = formatCurrency(cartTotal);
-            
-            // 2. FRETE (apenas se houver)
-            if (deliveryFee > 0) {
-                deliveryRow.classList.remove('hidden');
-                deliveryFeeElement.textContent = formatCurrency(deliveryFee);
-            } else {
-                deliveryRow.classList.add('hidden');
-            }
-            // 3. DESCONTO (apenas se houver cupom aplicado)
-            if (appliedCoupon && couponDiscount > 0) {
-                discountRow.classList.remove('hidden');
-                
-                // Obter valor do desconto do cupom
-                const discountValue = appliedCoupon.valor_desconto || appliedCoupon.valor || '';
-                const discountType = appliedCoupon.tipo_desconto || appliedCoupon.tipo || '';
-                const couponCode = appliedCoupon.codigo_cupom || appliedCoupon.codigo;
-                
-                // Formatar valor do desconto (% ou R$)
-                let discountPrefix = '';
-                if (discountValue.toString().includes('%')) {
-                    // Se contém %, mostrar como percentual
-                    discountPrefix = `${discountValue} `;
-                } else {
-                    // Se é valor fixo, mostrar como moeda
-                    const numericValue = parseFloat(discountValue.toString().replace(/[^0-9.,]/g, '').replace(',', '.'));
-                    if (!isNaN(numericValue)) {
-                        discountPrefix = `${formatCurrency(numericValue)} `;
-                    }
-                }
-                
-                // Definir label baseado no tipo de desconto
-                let label = 'Desconto';
-                
-                switch (discountType.toLowerCase()) {
-                    case 'produtos':
-                        label = `${discountPrefix}Desconto (${couponCode})`;
-                        break;
-                    case 'frete':
-                        label = `${discountPrefix}Desconto Frete (${couponCode})`;
-                        break;
-                    case 'total':
-                        label = `${discountPrefix}Desconto Total (${couponCode})`;
-                        break;
-                    default:
-                        label = `${discountPrefix}Desconto (${couponCode})`;
-                        break;
-                }
-                
-                discountLabelElement.textContent = label;
-                discountElement.textContent = '-' + formatCurrency(couponDiscount);
-            } else {
-                discountRow.classList.add('hidden');
-            }
-        }
-        
-        // Aplicar cupom via botão
-        function applyCouponFromButton() {
-            const couponInput = document.getElementById('coupon-code');
-            if (!couponInput) return;
-            
-            const code = couponInput.value.trim().toUpperCase();
-            if (!code) {
-                showCouponFeedback('Digite um código de cupom', 'error');
-                return;
-            }
-            
-            applyCoupon(code);
-        }
-        
-        // Aplicar cupom automaticamente ao digitar (REMOVIDO - agora só via botão)
-        function applyCouponOnType(code) {
-            // Função mantida para compatibilidade, mas não é mais usada
-            // Agora o cupom só é aplicado via botão
-        }
-        
-        // Aplicar cupom
-        function applyCoupon(code) {
-            debugLog('🔍 Validando cupom:', code);
-            
-            // Buscar cupom nos dados
-            const coupon = couponsData.find(c => 
-                (c.codigo_cupom || c.codigo || '').toString().toUpperCase() === code
-            );
-            
-            if (!coupon) {
-                showCouponFeedback('Cupom não encontrado', 'error');
-                return false;
-            }
-            
-            // Validar datas
-            if (!validateCouponDates(coupon)) {
-                return false;
-            }
-            
-            // Calcular desconto
-            const discount = calculateCouponDiscount(coupon);
-            
-            // Tratar erros específicos
-            if (discount === -1) {
-                showCouponFeedback('Cupom não aplicável: carrinho vazio', 'error');
-                return false;
-            } else if (discount === -2) {
-                const discountType = coupon.tipo_desconto || coupon.tipo || '';
-                if (discountType.toLowerCase() === 'frete') {
-                    showCouponFeedback('Cupom de frete: selecione delivery primeiro', 'error');
-                } else {
-                    showCouponFeedback('Cupom não aplicável: sem taxa de delivery', 'error');
-                }
-                return false;
-            } else if (discount <= 0) {
-                showCouponFeedback('Cupom não aplicável', 'error');
-                return false;
-            }
-            
-            // Aplicar cupom
-            appliedCoupon = coupon;
-            couponDiscount = discount;
-            
-            // Salvar cupom no localStorage
-            if (typeof saveCouponToStorage === 'function') {
-                saveCouponToStorage();
-            }
-            
-            debugLog('✅ Cupom aplicado:', code, 'Desconto:', formatCurrency(discount));
-            
-            // Atualizar interface com feedback simples
-            showCouponFeedback('✅ Cupom aplicado com sucesso!', 'success');
-            updateCheckoutOrderTotal();
-            
-            return true;
-        }
-        
-        // Inicializar timezone global a partir do config.js
-        function initializeGlobalTimezone() {
-            debugLog('🌍 =================================');
-            debugLog('🌍 INICIALIZANDO TIMEZONE GLOBAL');
-            debugLog('🌍 =================================');
-            
-            debugLog('📊 TIMEZONE CONFIGURADO NO CONFIG.JS:');
-            debugLog('- TIMEZONE constante:', TIMEZONE);
-            debugLog('- globalTimezone atual:', globalTimezone);
-            
-            // Validar se o timezone do config.js é válido
-            try {
-                debugLog('🧪 TESTANDO VALIDADE DO TIMEZONE...');
-                const testDate = new Date().toLocaleString("en-US", {timeZone: TIMEZONE});
-                debugLog('- Teste bem-sucedido! Data de teste:', testDate);
-                
-                globalTimezone = TIMEZONE;
-                debugLog('✅ ✅ ✅ TIMEZONE VÁLIDO CONFIGURADO! ✅ ✅ ✅');
-                debugLog('- globalTimezone definido como:', globalTimezone);
-            } catch (e) {
-                errorLog('❌ ❌ ❌ TIMEZONE INVÁLIDO NO CONFIG.JS! ❌ ❌ ❌');
-                errorLog('- Timezone configurado:', TIMEZONE);
-                errorLog('- Erro:', e.message);
-                debugLog('📝 Edite o arquivo config.js e use um timezone válido:');
-                debugLog('   - America/Sao_Paulo (Brasil - SP, RJ, MG)');
-                debugLog('   - America/Manaus (Brasil - AM, RR)');
-                debugLog('   - America/Rio_Branco (Brasil - AC)');
-                debugLog('   - America/Fortaleza (Brasil - CE, MA)');
-            }
-            
-            debugLog('🌍 RESULTADO FINAL:');
-            debugLog('- globalTimezone:', globalTimezone);
-            debugLog('- Tipo:', typeof globalTimezone);
-            debugLog('🌍 =================================');
-        }
-        
-        // Obter o timezone configurado (agora usa variável global)
-        function getConfiguredTimezone() {
-            return globalTimezone;
-        }
-        
-        // Função para teste manual do timezone (use no console)
-        window.testTimezone = function(timezone) {
-            debugLog('🧪 TESTE MANUAL DE TIMEZONE:');
-            debugLog('- Timezone a testar:', timezone);
-            try {
-                const testDate = new Date().toLocaleString("en-US", {timeZone: timezone});
-                debugLog('✅ Timezone válido! Data de teste:', testDate);
-                return true;
-            } catch (e) {
-                errorLog('❌ Timezone inválido:', e.message);
-                return false;
-            }
-        };
-        
         // Função para forçar timezone manualmente (use no console)
         window.forceTimezone = function(timezone) {
             debugLog('🔧 FORÇANDO TIMEZONE MANUALMENTE:');
@@ -6942,7 +6606,6 @@
                 return null;
             }
         }
-        
         // Calcular desconto do cupom
         function calculateCouponDiscount(coupon) {
             const cartTotal = calculateCartTotal();
@@ -7293,7 +6956,6 @@
                 debugLog('💰 Switcher de troco DESATIVADO - campo de valor oculto e resetado');
             }
         }
-        
         /**
          * Configura o campo de troco com validação
          */
@@ -7926,7 +7588,6 @@
         }
         // Variável para controlar o timeout de busca do bairro no modo CEP
         let cepNeighborhoodSearchTimeout = null;
-        
         /**
          * Manipula mudanças no campo de bairro para recalcular taxa de delivery
          * Versão aprimorada com debounce e busca direta na planilha
@@ -8043,226 +7704,6 @@
             // Atualizar total do checkout (sem taxa)
             updateCheckoutOrderTotal();
         }
-
-        // ====================================================================
-        // SISTEMA REDUNDANTE DE BUSCA DE TAXA POR BAIRRO - V1.0
-        // ====================================================================
-        
-        // Variáveis globais para controlar a busca de bairro
-        let bairroSearchTimeout = null;
-        let lastSearchedTerm = null; // Cache do último termo buscado
-        let neighborhoodsList = []; // Lista de bairros para autocomplete
-        let autocompleteContainer = null; // Container do autocomplete
-        let spinnerTimeout = null; // Timeout para parar spinner automaticamente
-        let lastInputValue = ''; // Último valor do input para detectar mudanças
-        
-        /**
-         * Prepara lista de bairros para autocomplete (chamada durante preloader)
-         */
-        function prepareNeighborhoodsAutocomplete() {
-            debugLog('📋 Preparando lista de bairros para autocomplete...');
-            
-            // Obter dados de bairros de qualquer fonte disponível
-            let dadosBairros = null;
-            
-            if (window.neighborhoodsData && Array.isArray(window.neighborhoodsData) && window.neighborhoodsData.length > 0) {
-                dadosBairros = window.neighborhoodsData;
-            } else if (typeof neighborhoodsData !== 'undefined' && Array.isArray(neighborhoodsData) && neighborhoodsData.length > 0) {
-                dadosBairros = neighborhoodsData;
-            } else if (window.localNeighborhoodsData && Array.isArray(window.localNeighborhoodsData) && window.localNeighborhoodsData.length > 0) {
-                dadosBairros = window.localNeighborhoodsData;
-            }
-            
-            if (!dadosBairros || dadosBairros.length === 0) {
-                debugLog('⚠️ Nenhum dado de bairro disponível para autocomplete');
-                return;
-            }
-            
-            // Extrair lista única de nomes de bairros
-            neighborhoodsList = dadosBairros
-                .map(item => {
-                    const nome = item.bairro || item.neighborhood || '';
-                    const taxa = parseFloat(item.taxa || item.fee || 0);
-                    return {
-                        nome: nome.trim(),
-                        taxa: taxa,
-                        normalizado: normalizarTexto(nome.toLowerCase())
-                    };
-                })
-                .filter(item => item.nome && item.nome.length > 0)
-                .sort((a, b) => a.nome.localeCompare(b.nome)); // Ordenar alfabeticamente
-            
-            // Remover duplicatas
-            const nomesUnicos = new Set();
-            neighborhoodsList = neighborhoodsList.filter(item => {
-                if (nomesUnicos.has(item.normalizado)) {
-                    return false;
-                }
-                nomesUnicos.add(item.normalizado);
-                return true;
-            });
-            
-            debugLog(`✅ Lista de autocomplete preparada: ${neighborhoodsList.length} bairros`);
-            debugLog('📋 Primeiros 5 bairros:', neighborhoodsList.slice(0, 5).map(b => b.nome));
-            
-            // Adicionar evento global para esconder autocomplete ao clicar fora
-            if (!window.autocompleteEventAdded) {
-                document.addEventListener('click', function(e) {
-                    const field = document.getElementById('neighborhood');
-                    const container = document.getElementById('neighborhood-autocomplete');
-                    
-                    if (field && container && 
-                        !field.contains(e.target) && 
-                        !container.contains(e.target)) {
-                        hideNeighborhoodAutocomplete();
-                    }
-                });
-                window.autocompleteEventAdded = true;
-            }
-        }
-        /**
-         * Verifica se o valor do input mudou e para o spinner se necessário
-         */
-        function checkInputChangeAndStopSpinner() {
-            const field = document.getElementById('neighborhood');
-            if (!field) return;
-            
-            const currentValue = field.value;
-            
-            // Se o valor não mudou e o spinner está ativo, pará-lo
-            if (currentValue === lastInputValue && field.classList.contains('neighborhood-loading')) {
-                debugLog('🚫 Valor do input não mudou, parando spinner por inatividade');
-                hideNeighborhoodSpinner();
-            }
-        }
-        /**
-         * Função REDUNDANTE para buscar taxa de entrega por bairro
-         * Implementa debounce e busca mais precisa por termo completo
-         */
-        function buscarTaxaPorBairroRedundante(bairroDigitado, forceImmediate = false) {
-            debugLog('🔍 === BUSCA REDUNDANTE DE TAXA POR BAIRRO === 🔍');
-            debugLog('🏠 Bairro digitado:', bairroDigitado);
-            debugLog('⚡ Busca imediata:', forceImmediate);
-            
-            // Limpar timeout anterior
-            if (bairroSearchTimeout) {
-                clearTimeout(bairroSearchTimeout);
-                bairroSearchTimeout = null;
-            }
-            
-            // Validação de entrada
-            if (!bairroDigitado || typeof bairroDigitado !== 'string' || bairroDigitado.trim().length < 3) {
-                debugLog('⚠️ Bairro inválido ou muito curto (mínimo 3 caracteres)');
-                
-                // Limpar spinner se campo inválido
-                hideNeighborhoodSpinner();
-                
-                // Mostrar autocomplete mesmo para termos curtos (≥2 caracteres)
-                if (bairroDigitado && bairroDigitado.trim().length >= 2) {
-                    showNeighborhoodAutocomplete(bairroDigitado.trim());
-                } else {
-                    hideNeighborhoodAutocomplete();
-                }
-                
-                limparTaxaDeEntrega();
-                return;
-            }
-            
-            const bairro = bairroDigitado.trim();
-            
-            // Verificar se já buscamos este termo recentemente (evitar buscas repetidas)
-            if (!forceImmediate && lastSearchedTerm === bairro.toLowerCase()) {
-                debugLog('💾 Cache: Termo já buscado recentemente, pulando busca:', bairro);
-                
-                // Mesmo com cache, mostrar autocomplete se disponível
-                if (bairro.length >= 2) {
-                    showNeighborhoodAutocomplete(bairro);
-                }
-                return;
-            }
-            
-            // Se não for busca forçada, mostrar autocomplete e implementar debounce
-            if (!forceImmediate) {
-                debugLog('⏱️ Mostrando autocomplete e implementando debounce de 800ms...');
-                
-                // Mostrar autocomplete imediatamente
-                showNeighborhoodAutocomplete(bairro);
-                
-                // Mostrar spinner no campo
-                showNeighborhoodSpinner();
-                
-                bairroSearchTimeout = setTimeout(() => {
-                    debugLog('🚀 Executando busca após debounce...');
-                    executarBuscaBairro(bairro);
-                }, 800);
-                return;
-            }
-            
-            // Busca imediata
-            executarBuscaBairro(bairro);
-        }
-        
-        /**
-         * Mostra spinner no campo de bairro com timeout automático
-         */
-        function showNeighborhoodSpinner() {
-            const field = document.getElementById('neighborhood');
-            if (!field) return;
-            
-            // Limpar timeout anterior se existir
-            if (spinnerTimeout) {
-                clearTimeout(spinnerTimeout);
-            }
-            
-            // Adicionar classe de loading
-            field.classList.add('neighborhood-loading');
-            field.style.backgroundImage = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 24 24\'%3E%3Cpath fill=\'%23666\' d=\'M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z\' opacity=\'.25\'/%3E%3Cpath fill=\'%23666\' d=\'M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z\'%3E%3CanimateTransform attributeName=\'transform\' dur=\'0.75s\' repeatCount=\'indefinite\' type=\'rotate\' values=\'0 12 12;360 12 12\'/%3E%3C/path%3E%3C/svg%3E")';
-            field.style.backgroundRepeat = 'no-repeat';
-            field.style.backgroundPosition = 'right 10px center';
-            field.style.backgroundSize = '16px 16px';
-            field.style.paddingRight = '35px';
-            
-            // Armazenar valor atual do input
-            lastInputValue = field.value;
-            
-            // Configurar timeout para parar spinner automaticamente após 5 segundos
-            spinnerTimeout = setTimeout(() => {
-                debugLog('⏰ Timeout: Parando spinner automaticamente após 5 segundos');
-                hideNeighborhoodSpinner();
-            }, 5000);
-            
-            // Configurar verificação intermediária a cada 2 segundos
-            setTimeout(() => {
-                checkInputChangeAndStopSpinner();
-            }, 2000);
-            
-            debugLog('🔄 Spinner ativado no campo de bairro (timeout: 5s)');
-        }
-        
-        /**
-         * Remove spinner do campo de bairro
-         */
-        function hideNeighborhoodSpinner() {
-            const field = document.getElementById('neighborhood');
-            if (!field) return;
-            
-            // Limpar timeout se existir
-            if (spinnerTimeout) {
-                clearTimeout(spinnerTimeout);
-                spinnerTimeout = null;
-            }
-            
-            // Remover classe e estilos de loading
-            field.classList.remove('neighborhood-loading');
-            field.style.backgroundImage = '';
-            field.style.backgroundRepeat = '';
-            field.style.backgroundPosition = '';
-            field.style.backgroundSize = '';
-            field.style.paddingRight = '';
-            
-            debugLog('✅ Spinner removido do campo de bairro');
-        }
-        
         /**
          * Mostra autocomplete de bairros
          */
@@ -8611,7 +8052,6 @@
                 }, 1000);
             }
         }
-        
         /**
          * Função para limpar taxa de entrega
          */
@@ -8635,294 +8075,6 @@
             // Atualizar total do pedido
             updateCheckoutOrderTotal();
         }
-        
-        /**
-         * Função REDUNDANTE de monitoramento do campo de bairro
-         * Esta função garante que SEMPRE que o usuário digitar, a busca será executada
-         * AGORA: Só executa quando o campo realmente existe (checkout aberto)
-         */
-        function iniciarMonitoramentoRedundanteBairro() {
-            debugLog('🔄 Iniciando monitoramento REDUNDANTE do campo de bairro');
-            
-            const campo = document.getElementById('neighborhood');
-            if (!campo) {
-                debugLog('⚠️ Campo de bairro não encontrado - checkout não está aberto');
-                return; // NÃO tentar novamente automaticamente
-            }
-            
-            debugLog('✅ Campo de bairro encontrado, configurando eventos...');
-            
-            // Variável para debounce
-            let timeoutBusca = null;
-            
-            // Função de busca com debounce INTELIGENTE
-            function executarBuscaComDebounce() {
-                const valor = campo.value.trim();
-                
-                // Cancelar busca anterior
-                if (timeoutBusca) {
-                    clearTimeout(timeoutBusca);
-                }
-                
-                // Se vazio ou muito curto, limpar
-                if (!valor || valor.length < 3) {
-                    if (valor.length === 0) {
-                        limparTaxaDeEntrega();
-                    }
-                    return;
-                }
-                
-                // Mostrar indicador visual de que está digitando
-                campo.style.backgroundColor = '#f0f9ff'; // Azul muito claro
-                
-                // Agendar nova busca com tempo maior para palavra completa
-                timeoutBusca = setTimeout(() => {
-                    debugLog('🚀 Executando busca para palavra completa:', valor);
-                    
-                    // Remover indicador visual
-                    campo.style.backgroundColor = '';
-                    
-                    // Executar busca
-                    buscarTaxaPorBairroRedundante(valor);
-                }, 1200); // 1.2 segundos para garantir palavra completa
-            }
-            
-            // Remover eventos anteriores
-            campo.removeEventListener('input', executarBuscaComDebounce);
-            campo.removeEventListener('change', executarBuscaComDebounce);
-            campo.removeEventListener('blur', executarBuscaComDebounce);
-            campo.removeEventListener('paste', executarBuscaComDebounce);
-            
-            // Adicionar apenas eventos que indicam fim da digitação
-            campo.addEventListener('input', executarBuscaComDebounce); // Com debounce longo
-            campo.addEventListener('change', function() {
-                // Busca imediata quando sai do campo
-                if (timeoutBusca) clearTimeout(timeoutBusca);
-                const valor = campo.value.trim();
-                if (valor.length >= 3) {
-                    debugLog('🚀 Busca imediata por CHANGE:', valor);
-                    buscarTaxaPorBairroRedundante(valor);
-                }
-            });
-            campo.addEventListener('blur', function() {
-                // Busca imediata quando perde o foco
-                if (timeoutBusca) clearTimeout(timeoutBusca);
-                const valor = campo.value.trim();
-                if (valor.length >= 3) {
-                    debugLog('🚀 Busca imediata por BLUR:', valor);
-                    buscarTaxaPorBairroRedundante(valor);
-                }
-            });
-            campo.addEventListener('paste', function() {
-                // Busca após colar texto
-                setTimeout(() => {
-                    const valor = campo.value.trim();
-                    if (valor.length >= 3) {
-                        debugLog('🚀 Busca imediata por PASTE:', valor);
-                        buscarTaxaPorBairroRedundante(valor);
-                    }
-                }, 200);
-            });
-            
-            // Sobrescrever atributo oninput apenas para updateAddressData
-            campo.setAttribute('oninput', 'updateAddressData();');
-            
-            debugLog('✅ Monitoramento redundante configurado com sucesso!');
-            
-            // Efeito visual para confirmar
-            campo.style.border = '2px solid #10b981';
-            setTimeout(() => {
-                campo.style.border = '';
-            }, 2000);
-        }
-        
-        // REMOVIDO: Inicialização automática do monitoramento
-        // Agora o monitoramento só é iniciado quando o checkout é aberto
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     setTimeout(iniciarMonitoramentoRedundanteBairro, 2000);
-        // });
-        
-        // Função de teste global
-        window.testarBuscaBairro = function(bairro) {
-            debugLog('🧪 Testando busca para:', bairro);
-            buscarTaxaPorBairroRedundante(bairro || 'Centro');
-        };
-        
-        // ====================================================================
-        // SISTEMA MODO ENDEREÇO MANUAL - "NÃO SEI MEU CEP" - V3.5
-        // ====================================================================
-
-        // Variável para controlar timeout de busca por bairro
-        let neighborhoodSearchTimeout = null;
-
-        /**
-         * Alterna entre modo CEP e modo endereço manual
-         */
-        function toggleAddressMode() {
-            debugLog('=== ALTERNANDO MODO DE ENDEREÇO ===');
-            
-            const cepContainer = document.getElementById('cep-mode-container');
-            const manualContainer = document.getElementById('manual-address-container');
-            const addressFields = document.getElementById('address-fields');
-            
-            if (!cepContainer || !manualContainer) {
-                errorLog('Containers de modo não encontrados');
-                return;
-            }
-            
-            // Limpar timeout de busca se existir
-            if (neighborhoodSearchTimeout) {
-                clearTimeout(neighborhoodSearchTimeout);
-                neighborhoodSearchTimeout = null;
-                debugLog('Timeout de busca limpo');
-            }
-            
-            const isManualMode = !manualContainer.classList.contains('hidden');
-            
-            if (isManualMode) {
-                // Mudando para modo CEP
-                debugLog('Mudando para modo CEP');
-                manualContainer.classList.add('hidden');
-                cepContainer.classList.remove('hidden');
-                
-                // Limpar campos manuais
-                clearManualAddressFields();
-                
-                // Ocultar campos de endereço automático
-                if (addressFields) {
-                    addressFields.classList.add('hidden');
-                }
-                
-                // Foco no campo CEP
-                setTimeout(() => {
-                    const cepField = document.getElementById('cep');
-                    if (cepField) {
-                        cepField.focus();
-                    }
-                }, 100);
-                
-            } else {
-                // Mudando para modo manual
-                debugLog('Mudando para modo MANUAL');
-                cepContainer.classList.add('hidden');
-                manualContainer.classList.remove('hidden');
-                
-                // Limpar campos CEP
-                clearAddressFields();
-                
-                // Foco no primeiro campo manual
-                setTimeout(() => {
-                    const streetField = document.getElementById('manual-street');
-                    if (streetField) {
-                        streetField.focus();
-                    }
-                }, 100);
-            }
-            
-            // Limpar taxa de delivery ao alternar
-            clearDeliveryFee();
-            
-            // Limpar dados do endereço
-            if (window.orderData && window.orderData.address) {
-                window.orderData.address = {};
-            }
-            
-            // Atualizar botão continuar
-            updateContinueButton();
-            
-            debugLog('Modo atual:', isManualMode ? 'CEP' : 'MANUAL');
-        }
-
-        /**
-         * Atualiza os dados do endereço manual
-         */
-        function updateManualAddressData() {
-            const streetField = document.getElementById('manual-street');
-            const numberField = document.getElementById('manual-number');
-            const complementField = document.getElementById('manual-complement');
-            const neighborhoodField = document.getElementById('manual-neighborhood');
-            const cityField = document.getElementById('manual-city');
-            
-            if (!streetField || !numberField || !neighborhoodField || !cityField) {
-                return;
-            }
-            
-            // Inicializar orderData.address se não existir (usar variável global consistente)
-            if (!orderData) {
-                orderData = {};
-            }
-            if (!orderData.address) {
-                orderData.address = {};
-            }
-            
-            // Preservar taxa de delivery existente
-            const existingDeliveryFee = orderData.address.deliveryFee;
-            
-            // Construir endereço completo
-            const street = streetField.value.trim();
-            const number = numberField.value.trim();
-            const complement = complementField.value.trim();
-            const neighborhood = neighborhoodField.value.trim();
-            const city = cityField.value.trim();
-            
-            // Montar endereço completo
-            let fullAddress = street;
-            if (number) fullAddress += `, ${number}`;
-            if (complement) fullAddress += `, ${complement}`;
-            
-            // Atualizar dados do pedido
-            orderData.address = {
-                cep: '',
-                street: fullAddress,
-                neighborhood: neighborhood,
-                city: city,
-                state: '',
-                isManual: true
-            };
-            
-            // Restaurar taxa de delivery se existia
-            if (existingDeliveryFee) {
-                orderData.address.deliveryFee = existingDeliveryFee;
-            }
-            
-            debugLog('DEBUG - Dados endereço manual atualizados:', orderData.address);
-        }
-        /**
-         * Busca taxa de delivery por bairro no modo manual (com debounce)
-         */
-        function searchNeighborhoodFee() {
-            const neighborhoodField = document.getElementById('manual-neighborhood');
-            if (!neighborhoodField) return;
-            
-            const neighborhood = neighborhoodField.value.trim();
-            
-            // Limpar timeout anterior
-            if (neighborhoodSearchTimeout) {
-                clearTimeout(neighborhoodSearchTimeout);
-            }
-            
-            // Se menos de 3 caracteres, limpar taxa
-            if (neighborhood.length < 3) {
-                clearDeliveryFee();
-                
-                // 🔒 Atualizar estado do botão continuar para bairro vazio
-                const config = getCheckoutConfig();
-                if (config.only_bairro_mode === 'Sim') {
-                    updateContinueButtonState(false, '');
-                }
-                return;
-            }
-            
-            // Aguardar 800ms após o usuário parar de digitar
-            neighborhoodSearchTimeout = setTimeout(() => {
-                performNeighborhoodSearch(neighborhood);
-                
-                // 🔒 Atualizar estado do botão continuar baseado na validação do bairro
-                const isValid = validateNeighborhoodForDelivery(neighborhood);
-                updateContinueButtonState(isValid, neighborhood);
-            }, 800);
-        }
-
         /**
          * Executa a busca real por bairro
          */
@@ -9983,272 +9135,6 @@
                 sendViaWebhook(message, envioConfig.webhook_url);
             }
         }
-        
-        // Format order message
-        function formatOrderMessage(restaurantName) {
-            if (typeof debugLog === 'function') {
-                debugLog('=== DEBUG FORMAT ORDER MESSAGE ===');
-                debugLog('restaurantName:', restaurantName);
-                debugLog('orderData:', orderData);
-                debugLog('cart:', cart);
-                debugLog('===================================');
-            }
-            
-            let message = `🔔 *NOVO PEDIDO* 🔔\n`;
-            message += `━━━━━━━━━━━━━━\n\n`;
-            
-            // Customer info
-            message += `👤 *Cliente:* ${orderData.customerName}\n`;
-            if (orderData.customerWhatsApp) {
-                message += `📱 *WhatsApp:* ${orderData.customerWhatsApp}\n`;
-            }
-            
-            // Delivery type
-            const deliveryTypes = {
-                'local': '🍽️ Consumir no Local',
-                'pickup': '🥡 Retirar no Balcão', 
-                'delivery': '🛵 Delivery',
-                'default': '📋 Padrão'
-            };
-            message += `📍 *Entrega:* ${deliveryTypes[orderData.deliveryType]}\n`;
-            
-            // Additional info based on delivery type
-            if (orderData.deliveryType === 'local' && orderData.tableNumber) {
-                message += `🪑 *Mesa/Comanda:* ${orderData.tableNumber}\n`;
-            }
-            
-            // Debug da condição de endereço
-            debugLog('DEBUG - Condição de endereço:');
-            debugLog('deliveryType:', orderData.deliveryType);
-            debugLog('orderData.address:', orderData.address);
-            debugLog('orderData.address.street:', orderData.address.street);
-            debugLog('Condição atendida?', orderData.deliveryType === 'delivery' && orderData.address.street);
-            
-            if (orderData.deliveryType === 'delivery' && orderData.address.street) {
-                message += `🏠 *Endereço:*\n`;
-                
-                // Verificar se é endereço manual ou automático
-                debugLog('DEBUG - Verificando tipo de endereço:');
-                debugLog('isManual:', orderData.address.isManual);
-                debugLog('deliveryFee:', orderData.address.deliveryFee);
-                
-                if (orderData.address.isManual) {
-                    // Endereço manual - formato diferenciado
-                    message += `   ${orderData.address.street}\n`;
-                    message += `   ${orderData.address.neighborhood}\n`;
-                    message += `   ${orderData.address.city}\n`;
-                    message += `   *Endereço informado manualmente*\n`;
-                } else {
-                    // Endereço automático via CEP - formato original
-                    message += `   ${orderData.address.street}, ${orderData.address.number}`;
-                    if (orderData.address.complement) {
-                        message += ` - ${orderData.address.complement}`;
-                    }
-                    message += `\n   ${orderData.address.neighborhood}\n`;
-                    message += `   ${orderData.address.city} - ${orderData.address.state}\n`;
-                    message += `   CEP: ${orderData.address.cep}\n`;
-                }
-                
-                // Adicionar taxa de delivery se existir (funciona para ambos os modos)
-                debugLog('DEBUG - Verificando taxa de delivery:');
-                debugLog('orderData.address:', orderData.address);
-                debugLog('orderData.address.deliveryFee:', orderData.address.deliveryFee);
-                debugLog('currentDeliveryFee:', currentDeliveryFee);
-                
-                // Usar orderData.address.deliveryFee ou currentDeliveryFee como fallback
-                const deliveryFee = orderData.address.deliveryFee || currentDeliveryFee;
-                debugLog('deliveryFee final:', deliveryFee);
-                
-                if (deliveryFee && deliveryFee > 0) {
-                    message += `\n🚚 *Taxa de Delivery:* ${formatCurrency(deliveryFee)} (${orderData.address.neighborhood})\n`;
-                    debugLog('Taxa de delivery adicionada à mensagem:', deliveryFee);
-                } else {
-                    debugLog('Taxa de delivery NÃO adicionada - nenhuma taxa encontrada');
-                }
-            }
-            
-            message += `\n━━━━━━━━━━━━━━\n`;
-            message += `🛍️ *ITENS DO PEDIDO:*\n\n`;
-            
-            // Items
-            cart.forEach(item => {
-                // Verificar se o item tem preço válido
-                const itemPrice = parseFloat(item.preco);
-                const hasValidPrice = !isNaN(itemPrice) && itemPrice > 0;
-                const itemSubtotal = hasValidPrice ? itemPrice * item.quantity : 0;
-                
-                message += `• *${item.nome}* (${item.sku})\n`;
-                if (item.variationText) {
-                    // Melhorar formatação das variações no WhatsApp - substituir pipes por quebras de linha
-                    const formattedVariations = item.variationText.replace(/\s*\|\s*/g, '\n     ');
-                    message += `  └ ✓ ${formattedVariations}\n`;
-                }
-                if (item.removalText) {
-                    // Melhorar formatação das remoções no WhatsApp - substituir pipes por quebras de linha
-                    const formattedRemovals = item.removalText.replace(/\s*\|\s*/g, '\n     ');
-                    // Remover duplicação do texto "Remover Ingredientes:" se já estiver presente
-                    const cleanRemovals = formattedRemovals.replace(/^Remover Ingredientes:\s*/i, '');
-                    message += `  └ 🚫 Remover Ingredientes: ${cleanRemovals}\n`;
-                }
-                if (item.notes) {
-                    message += `  └ Obs: ${item.notes}\n`;
-                }
-                
-                // Exibir preço baseado na validade com formatação melhorada
-                if (hasValidPrice) {
-                    message += `  └ 📊 Qtd: ${item.quantity}x\n`;
-                    message += `  └ 💰 Unitário: ${formatCurrency(itemPrice)}\n`;
-                    message += `  └ 🧮 Subtotal: ${formatCurrency(itemSubtotal)}\n\n\n`;
-                } else {
-                    message += `  └ 📊 Qtd: ${item.quantity}x\n`;
-                    message += `  └ 💰 Preço: 💬 Consulte\n\n\n`;
-                }
-            });
-            
-            // Total com breakdown detalhado - calcular apenas itens com preço válido
-            let subtotal = cart.reduce((sum, item) => {
-                const itemPrice = parseFloat(item.preco);
-                if (isNaN(itemPrice) || itemPrice <= 0) {
-                    return sum; // Ignora itens de consulta
-                }
-                return sum + (itemPrice * item.quantity);
-            }, 0);
-            let total = subtotal;
-            
-            // Adicionar taxa de delivery ao total se existir
-            debugLog('DEBUG - Calculando total com taxa:');
-            debugLog('Subtotal produtos:', subtotal);
-            debugLog('deliveryType:', orderData.deliveryType);
-            debugLog('address:', orderData.address);
-            
-            // Usar orderData.address.deliveryFee ou currentDeliveryFee como fallback
-            const totalDeliveryFee = (orderData.address && orderData.address.deliveryFee) || currentDeliveryFee;
-            debugLog('totalDeliveryFee:', totalDeliveryFee);
-            
-            if (orderData.deliveryType === 'delivery' && totalDeliveryFee && totalDeliveryFee > 0) {
-                total += totalDeliveryFee;
-                debugLog('Taxa adicionada ao total:', totalDeliveryFee);
-            }
-            
-            // Verificar se há itens de consulta e itens com preço
-            const hasConsultationItems = cart.some(item => {
-                const itemPrice = parseFloat(item.preco);
-                return isNaN(itemPrice) || itemPrice <= 0;
-            });
-            const hasPricedItems = cart.some(item => {
-                const itemPrice = parseFloat(item.preco);
-                return !isNaN(itemPrice) && itemPrice > 0;
-            });
-            
-            // ✅ LÓGICA: Só mostrar resumo financeiro se houver itens com preço
-            if (hasPricedItems) {
-                message += `━━━━━━━━━━━━━━\n`;
-                message += `💰 *RESUMO FINANCEIRO:*\n\n`;
-                
-                // Breakdown detalhado
-                if (hasConsultationItems) {
-                    message += `💵 Subtotal produtos: ${formatCurrency(subtotal)} + itens para consulta\n`;
-                } else {
-                    message += `💵 Subtotal produtos: ${formatCurrency(subtotal)}\n`;
-                }
-                
-                if (orderData.deliveryType === 'delivery' && totalDeliveryFee && totalDeliveryFee > 0) {
-                    message += `🚚 Taxa de delivery: ${formatCurrency(totalDeliveryFee)}\n`;
-                }
-                
-                // Mostrar total antes do desconto se houver cupom
-                if (appliedCoupon && couponDiscount > 0) {
-                    message += `Total: ${formatCurrency(total)}\n`;
-                }
-                
-                // Adicionar informações do cupom se aplicado
-                if (appliedCoupon && couponDiscount > 0) {
-                    const discountType = appliedCoupon.tipo_desconto || appliedCoupon.tipo || '';
-                    let typeText = '';
-                    
-                    switch (discountType.toLowerCase()) {
-                        case 'produtos':
-                            typeText = 'nos produtos';
-                            break;
-                        case 'frete':
-                            typeText = 'no frete';
-                            break;
-                        case 'total':
-                            typeText = 'no total';
-                            break;
-                    }
-                    
-                    message += `🎟️ Cupom ${appliedCoupon.codigo_cupom || appliedCoupon.codigo}: -${formatCurrency(couponDiscount)} (${typeText})\n`;
-                    total = Math.max(0, total - couponDiscount);
-                    debugLog('Desconto aplicado:', couponDiscount, 'Total final:', total);
-                }
-                
-                message += `\n💰 *TOTAL FINAL: ${formatCurrency(total)}*\n`;
-                message += `━━━━━━━━━━━━━━\n`;
-            } else {
-                // ✅ TODOS OS ITENS SÃO DE CONSULTA - NÃO MOSTRAR RESUMO FINANCEIRO
-                debugLog('📝 Todos os itens são de consulta - resumo financeiro omitido');
-                message += `━━━━━━━━━━━━━━\n`;
-                message += `💬 *Valores para consulta no estabelecimento*\n`;
-                message += `━━━━━━━━━━━━━━\n`;
-            }
-            
-            // Payment info (only for pickup, delivery, default AND if payment field is enabled AND if there are priced items)
-            const checkoutConfig = getCheckoutConfig();
-            const deliveryTypesWithPayment = ['pickup', 'delivery', 'default'];
-            if (deliveryTypesWithPayment.includes(orderData.deliveryType) && checkoutConfig.step3_show_formas_pag === 'Sim' && hasPricedItems) {
-                // Get payment methods from spreadsheet configuration
-                const configuredMethods = checkoutConfig.step3_formas_pag;
-                const paymentMethods = {};
-                
-                if (configuredMethods && configuredMethods.trim() !== '') {
-                    // Parse configured payment methods
-                    const methodsList = configuredMethods.split(',').map(method => method.trim());
-                    
-                    // Create dynamic mapping with emojis
-                    methodsList.forEach(method => {
-                        const methodKey = method.toLowerCase().replace(/\s+/g, '-');
-                        let emoji = '💳'; // Default credit card emoji
-                        
-                        // Assign specific emojis based on method name
-                        if (method.toLowerCase().includes('dinheiro')) {
-                            emoji = '💵';
-                        } else if (method.toLowerCase().includes('pix')) {
-                            emoji = '📱';
-                        } else if (method.toLowerCase().includes('cartão') || method.toLowerCase().includes('cartao')) {
-                            emoji = '💳';
-                        } else if (method.toLowerCase().includes('alelo') || method.toLowerCase().includes('vale') || method.toLowerCase().includes('ticket')) {
-                            emoji = '🎫'; // Simpler ticket emoji
-                        }
-                        
-                        paymentMethods[methodKey] = `${emoji} ${method}`;
-                    });
-                }
-                
-                // Só incluir se paymentMethod estiver definido
-                if (orderData.paymentMethod && paymentMethods[orderData.paymentMethod]) {
-                    message += `\n💳 *Pagamento:* ${paymentMethods[orderData.paymentMethod]}\n`;
-                    
-                    if (orderData.paymentMethod === 'dinheiro' && orderData.changeAmount) {
-                        const changeValue = getNumericValue(orderData.changeAmount);
-                        message += `💸 *Troco para:* ${formatCurrency(changeValue)}\n`;
-                    }
-                    message += `━━━━━━━━━━━━━━\n`;
-                }
-            }
-            
-            // Notes
-            if (orderData.notes) {
-                message += `\n📝 *Observações:*\n${orderData.notes}\n`;
-                message += `━━━━━━━━━━━━━━\n`;
-            }
-            
-            message += `\n⏰ *Pedido realizado em:* ${new Date().toLocaleString('pt-BR')}\n`;
-            message += `\n✅ *Aguardando confirmação do estabelecimento*`;
-            
-            return message;
-        }
-        
         // Format order message for thermal printing (no emojis, clean format)
         function formatOrderMessageThermal(restaurantName) {
             if (typeof debugLog === 'function') {
@@ -10596,7 +9482,6 @@
             debugLog('Total antes do desconto (num):', totalBeforeDiscount);
             debugLog('Cupom aplicado?', hasCoupon, 'Desconto (num):', (couponDiscount || 0));
             debugLog('Total final (num):', totalFinal);
-            
             // Prepare order data for webhook with specific fields
             const orderPayload = {
                 // Main requested fields
@@ -11230,7 +10115,6 @@
                 }
             }
         }
-        
         // Clear search
         function clearSearch() {
             const searchInput = document.getElementById('search');
@@ -11435,9 +10319,7 @@
             const statusDot = document.getElementById('status-dot');
             if (!statusText || !statusDot) return;
             statusText.textContent = isOpen ? 'Aberto' : 'Fechado';
-            statusText.className = 'font-medium';
-            statusText.style.color = isOpen ? 'var(--cor-sucesso)' : 'var(--cor-erro)';
-            statusDot.className = 'w-2 h-2 rounded-full';
+            // Preservar classes e tipografia do header; apenas ajustar a cor do ponto
             statusDot.style.backgroundColor = isOpen ? 'var(--cor-sucesso)' : 'var(--cor-erro)';
         }
         async function updateOperatingHours() {
@@ -11453,8 +10335,6 @@
                 debugLog('🕰️ Timezone usado para horários:', timezone);
                 
                 const headers = lines[0].split(','); // Use first line as headers
-                
-                // Get current time using global timezone functions
                 const timezoneDate = getCurrentDateInTimezone();
                 const dayOfWeek = getDayOfWeekInPortuguese(timezoneDate.getDay());
                 const currentTime = timezoneDate.getHours() * 60 + timezoneDate.getMinutes(); // Convert to minutes
@@ -11501,13 +10381,10 @@
                 const hoursText = document.getElementById('hours-text');
                 const statusDot = document.getElementById('status-dot');
                 
-                if (statusText && hoursText && statusDot) {
-                    statusText.textContent = isOpen ? 'Aberto' : 'Fechado';
-                    statusText.className = 'font-medium';
-                    statusText.style.color = isOpen ? 'var(--cor-sucesso)' : 'var(--cor-erro)';
-                    
-                    statusDot.className = 'w-2 h-2 rounded-full';
-                    statusDot.style.backgroundColor = isOpen ? 'var(--cor-sucesso)' : 'var(--cor-erro)';
+                                    if (statusText && hoursText && statusDot) {
+                        statusText.textContent = isOpen ? 'Aberto' : 'Fechado';
+                        // Mantém classes visuais do header; só o dot muda de cor
+                        statusDot.style.backgroundColor = isOpen ? 'var(--cor-sucesso)' : 'var(--cor-erro)';
                     
                     if (isOpen && nextCloseTime) {
                         hoursText.textContent = `até ${nextCloseTime}`;
@@ -11560,7 +10437,6 @@
             const mins = minutes % 60;
             return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
         }
-
         function checkIfOpen(schedule, currentTime) {
             // Get time periods - new format with Período 1, 2, 3
             const periods = [
@@ -11909,7 +10785,6 @@
         /**
          * ===== FUNÇÕES MODAL ESTABELECIMENTO FECHADO =====
          */
-        
         /**
          * Mostra modal de estabelecimento fechado
          */
@@ -12234,7 +11109,6 @@
             // Limpar QR Code gerado
             generatedQRCode = null;
         }
-        
         /**
          * Copia a URL do cardápio para a área de transferência
          */
@@ -12573,7 +11447,6 @@
             background-color: #3b82f6;
             color: white;
         }
-
         .notification-close {
             background: none;
             border: none;
@@ -12642,264 +11515,6 @@
             const notification = document.getElementById('notification');
             notification.classList.remove('show');
         }
-        // Função para verificar limites de seleção
-        function checkSelectionLimit(input, variationData) {
-            if (!variationData || variationData.type !== 'checkbox') {
-                return true;
-            }
-            
-            const maxSelect = variationData.maxSelect;
-            if (!maxSelect || maxSelect <= 0) {
-                return true;
-            }
-            
-            // Encontrar o container da variação
-            const variationContainer = input.closest('.variation-container');
-            if (!variationContainer) {
-                return true;
-            }
-            
-            const checkedInputs = variationContainer.querySelectorAll('input[type="checkbox"]:checked');
-            
-            if (input.checked && checkedInputs.length > maxSelect) {
-                input.checked = false;
-                showNotification(`Máximo de ${maxSelect} opções permitidas!`, 'warning', 3000);
-                return false;
-            }
-            
-            return true;
-        }
-        
-        // Função para verificar seleções mínimas obrigatórias
-        function checkMinimumSelections(variationData) {
-            if (!variationData || variationData.type !== 'checkbox') {
-                return true;
-            }
-            
-            const minSelect = variationData.minSelect;
-            if (!minSelect || minSelect <= 0) {
-                return true;
-            }
-            
-            // Contar seleções atuais para esta variação
-            const variationIndex = variationData.index;
-            const selectedCount = Object.keys(selectedVariations).filter(key => 
-                key.startsWith(`${variationIndex}-`)
-            ).length;
-            
-            if (selectedCount < minSelect) {
-                showNotification(`Selecione pelo menos ${minSelect} opções em "${variationData.name}"!`, 'warning', 4000);
-                return false;
-            }
-            
-            return true;
-        }
-        
-        // Função para validar todas as variações antes de adicionar ao carrinho
-        function validateAllVariations() {
-            const variations = parseVariations(currentProduct.classificacaoAdicional);
-            if (!variations || variations.type !== 'multiple_variations') {
-                return true;
-            }
-            
-            let isValid = true;
-            
-            // Verificar variações obrigatórias
-            const requiredVariations = variations.variations.filter(v => v.required);
-            for (const requiredVar of requiredVariations) {
-                const variationIndex = variations.variations.indexOf(requiredVar);
-                const hasSelectionForThisVariation = Object.keys(selectedVariations)
-                    .some(key => key.startsWith(`${variationIndex}-`));
-                
-                if (!hasSelectionForThisVariation) {
-                    showNotification(`Selecione uma opção em "${requiredVar.name}"!`, 'warning', 4000);
-                    isValid = false;
-                    break;
-                }
-            }
-            
-            // Verificar seleções mínimas para checkboxes
-            if (isValid) {
-                for (let i = 0; i < variations.variations.length; i++) {
-                    const variation = variations.variations[i];
-                    if (variation.type === 'checkbox' && variation.minSelect > 0) {
-                        const selectedCount = Object.keys(selectedVariations).filter(key => 
-                            key.startsWith(`${i}-`)
-                        ).length;
-                        
-                        if (selectedCount > 0 && selectedCount < variation.minSelect) {
-                            showNotification(`Selecione pelo menos ${variation.minSelect} opções em "${variation.name}"!`, 'warning', 4000);
-                            isValid = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            return isValid;
-        }
-        
-        // Função para validar todas as variações antes de adicionar ao carrinho
-        function validateAllVariations() {
-            const variations = document.querySelectorAll('[data-variation-name]');
-            
-            for (const variation of variations) {
-                const variationName = variation.dataset.variationName;
-                const variationData = {
-                    name: variationName,
-                    type: variation.dataset.variationType || 'radio',
-                    required: variation.dataset.variationRequired === 'true',
-                    min: parseInt(variation.dataset.variationMin) || 0,
-                    max: parseInt(variation.dataset.variationMax) || 999
-                };
-                
-                // Verificar seleções mínimas para variações obrigatórias
-                if (variationData.required) {
-                    const isValid = checkMinimumSelections(variationData);
-                    if (!isValid) {
-                        showToast(`Por favor, selecione pelo menos uma opção em "${variationName}"`, 'error');
-                        return false;
-                    }
-                }
-                
-                // Verificar limites para variações checkbox
-                if (variationData.type === 'checkbox') {
-                    const selectedOptions = variation.querySelectorAll('input[type="checkbox"]:checked');
-                    
-                    if (selectedOptions.length < variationData.min) {
-                        showToast(`Selecione pelo menos ${variationData.min} opções em "${variationName}"`, 'error');
-                        return false;
-                    }
-                    
-                    if (selectedOptions.length > variationData.max) {
-                        showToast(`Selecione no máximo ${variationData.max} opções em "${variationName}"`, 'error');
-                        return false;
-                    }
-                }
-            }
-            
-            return true;
-        }
-
-
-
-
-        /**
- * ====================================================================
- * SISTEMA DE LOCALSTORAGE - CARDÁPIO SHEETS V3.8.0
- * ====================================================================
- * 
- * Sistema robusto de persistência de dados usando localStorage
- * para manter carrinho, cupons, dados do formulário e configurações
- * entre sessões do usuário.
- * 
- * Funcionalidades:
- * - Persistência de carrinho com variações e notas
- * - Persistência de cupons aplicados
- * - Persistência de dados do formulário de checkout
- * - Persistência de taxa de delivery
- * - Sistema de versionamento e expiração
- * - Limpeza automática de dados expirados
- * - Logs detalhados para debug
- * - Fallbacks para compatibilidade
- * 
- * Desenvolvido por Dante Testa - dantetesta.com.br
- */
-(function() {
-    'use strict';
-    
-    // ===== CONFIGURAÇÕES DO SISTEMA =====
-    const STORAGE_CONFIG = {
-        VERSION: '3.8.0',
-        EXPIRATION_DAYS: 30, // Dados expiram em 30 dias
-        KEYS: {
-            CART: 'cardapio_cart_v2',
-            COUPON: 'cardapio_coupon_v2',
-            ORDER_DATA: 'cardapio_order_data_v2',
-            DELIVERY_FEE: 'cardapio_delivery_fee_v2',
-            CSV_CACHE: 'cardapio_csv_cache_v2'
-        },
-        DEBUG: true // Será sobrescrito pelo DEBUG_MODE do config.js
-    };
-    
-    // ===== UTILITÁRIOS =====
-    
-    /**
-     * Log de debug personalizado
-     */
-    function storageLog(message, ...args) {
-        if (STORAGE_CONFIG.DEBUG && typeof debugLog === 'function') {
-            debugLog('💾 [localStorage]', message, ...args);
-        } else if (STORAGE_CONFIG.DEBUG) {
-            debugLog('💾 [localStorage]', message, ...args);
-        }
-    }
-    
-    /**
-     * Log de erro personalizado
-     */
-    function storageError(message, ...args) {
-        if (typeof errorLog === 'function') {
-            errorLog('❌ [localStorage]', message, ...args);
-        } else {
-            console.error('❌ [localStorage]', message, ...args);
-        }
-    }
-    
-    /**
-     * Verificar se localStorage está disponível
-     */
-    function isLocalStorageAvailable() {
-        try {
-            const test = '__localStorage_test__';
-            localStorage.setItem(test, test);
-            localStorage.removeItem(test);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-    
-    /**
-     * Criar timestamp de expiração
-     */
-    function createExpirationTimestamp() {
-        return Date.now() + (STORAGE_CONFIG.EXPIRATION_DAYS * 24 * 60 * 60 * 1000);
-    }
-    
-    /**
-     * Verificar se dados expiraram
-     */
-    function isExpired(timestamp) {
-        return Date.now() > timestamp;
-    }
-    
-    /**
-     * Salvar dados no localStorage com versionamento e expiração
-     */
-    function saveToStorage(key, data) {
-        if (!isLocalStorageAvailable()) {
-            storageError('localStorage não disponível');
-            return false;
-        }
-        
-        try {
-            const storageData = {
-                version: STORAGE_CONFIG.VERSION,
-                timestamp: Date.now(),
-                expires: createExpirationTimestamp(),
-                data: data
-            };
-            
-            localStorage.setItem(key, JSON.stringify(storageData));
-            storageLog(`Dados salvos: ${key}`, data);
-            return true;
-        } catch (e) {
-            storageError(`Erro ao salvar ${key}:`, e);
-            return false;
-        }
-    }
-    
     /**
      * Carregar dados do localStorage com verificação de versão e expiração
      */
@@ -12998,254 +11613,6 @@
         }
         return success;
     };
-    // ===== FUNÇÕES ESPECÍFICAS DE CUPONS =====
-    /**
-     * Salvar cupom no localStorage
-     */
-    window.saveCouponToStorage = function() {
-        if (typeof appliedCoupon !== 'undefined' && typeof couponDiscount !== 'undefined') {
-            const couponData = {
-                appliedCoupon: appliedCoupon,
-                couponDiscount: couponDiscount
-            };
-            const success = saveToStorage(STORAGE_CONFIG.KEYS.COUPON, couponData);
-            if (success && appliedCoupon) {
-                storageLog(`🎟️ Cupom salvo: ${appliedCoupon.codigo} (${couponDiscount})`);
-            }
-            return success;
-        }
-        return false;
-    };
-    
-    /**
-     * Carregar cupom do localStorage
-     */
-    window.loadCouponFromStorage = function() {
-        const couponData = loadFromStorage(STORAGE_CONFIG.KEYS.COUPON);
-        if (couponData && couponData.appliedCoupon) {
-            if (typeof appliedCoupon !== 'undefined' && typeof couponDiscount !== 'undefined') {
-                appliedCoupon = couponData.appliedCoupon;
-                couponDiscount = couponData.couponDiscount || 0;
-                storageLog(`🎟️ Cupom restaurado: ${appliedCoupon.codigo} (${couponDiscount})`);
-                return true;
-            }
-        }
-        return false;
-    };
-    
-    /**
-     * Limpar cupom do localStorage
-     */
-    window.clearCouponFromStorage = function() {
-        const success = removeFromStorage(STORAGE_CONFIG.KEYS.COUPON);
-        if (success) {
-            storageLog('🎟️ Cupom limpo do localStorage');
-        }
-        return success;
-    };
-    
-    // ===== FUNÇÕES ESPECÍFICAS DE DADOS DO PEDIDO =====
-    
-    /**
-     * Salvar dados do pedido no localStorage
-     */
-    window.saveOrderDataToStorage = function() {
-        if (typeof orderData !== 'undefined' && orderData) {
-            const success = saveToStorage(STORAGE_CONFIG.KEYS.ORDER_DATA, orderData);
-            if (success) {
-                storageLog('📝 Dados do pedido salvos', orderData);
-            }
-            return success;
-        }
-        return false;
-    };
-    
-    /**
-     * Carregar dados do pedido do localStorage
-     */
-    window.loadOrderDataFromStorage = function() {
-        const savedOrderData = loadFromStorage(STORAGE_CONFIG.KEYS.ORDER_DATA);
-        if (savedOrderData && typeof orderData !== 'undefined') {
-            // Mesclar dados salvos com dados atuais
-            Object.assign(orderData, savedOrderData);
-            
-            // Preencher campos do formulário
-            fillFormFields(savedOrderData);
-            
-            storageLog('📝 Dados do pedido restaurados', savedOrderData);
-            return true;
-        }
-        return false;
-    };
-    
-    /**
-     * Preencher campos do formulário com dados salvos
-     */
-    function fillFormFields(data) {
-        try {
-            if (data.customerName) {
-                const nameField = document.getElementById('customer-name');
-                if (nameField) nameField.value = data.customerName;
-            }
-            
-            if (data.whatsapp) {
-                const whatsappField = document.getElementById('customer-whatsapp');
-                if (whatsappField) whatsappField.value = data.whatsapp;
-            }
-            
-            if (data.paymentMethod) {
-                const paymentField = document.getElementById('payment-method');
-                if (paymentField) paymentField.value = data.paymentMethod;
-            }
-            
-            if (data.changeAmount) {
-                const changeField = document.getElementById('change-amount');
-                if (changeField) changeField.value = data.changeAmount;
-            }
-            
-            if (data.notes) {
-                const notesField = document.getElementById('order-notes');
-                if (notesField) notesField.value = data.notes;
-            }
-            
-            if (data.deliveryType) {
-                const deliveryRadio = document.querySelector(`input[name="delivery-type"][value="${data.deliveryType}"]`);
-                if (deliveryRadio) deliveryRadio.checked = true;
-            }
-            
-            storageLog('📝 Campos do formulário preenchidos');
-        } catch (e) {
-            storageError('Erro ao preencher campos do formulário:', e);
-        }
-    }
-    
-    /**
-     * Limpar dados do pedido do localStorage
-     */
-    window.clearOrderDataFromStorage = function() {
-        const success = removeFromStorage(STORAGE_CONFIG.KEYS.ORDER_DATA);
-        if (success) {
-            storageLog('📝 Dados do pedido limpos do localStorage');
-        }
-        return success;
-    };
-    
-    // ===== FUNÇÕES ESPECÍFICAS DE TAXA DE DELIVERY =====
-    
-    /**
-     * Salvar taxa de delivery no localStorage
-     */
-    window.saveDeliveryFeeToStorage = function() {
-        if (typeof currentDeliveryFee !== 'undefined') {
-            const success = saveToStorage(STORAGE_CONFIG.KEYS.DELIVERY_FEE, currentDeliveryFee);
-            if (success) {
-                storageLog(`🚚 Taxa de delivery salva: ${currentDeliveryFee}`);
-            }
-            return success;
-        }
-        return false;
-    };
-    
-    /**
-     * Carregar taxa de delivery do localStorage
-     */
-    window.loadDeliveryFeeFromStorage = function() {
-        const savedFee = loadFromStorage(STORAGE_CONFIG.KEYS.DELIVERY_FEE);
-        if (savedFee !== null && typeof currentDeliveryFee !== 'undefined') {
-            currentDeliveryFee = savedFee;
-            storageLog(`🚚 Taxa de delivery restaurada: ${savedFee}`);
-            return true;
-        }
-        return false;
-    };
-    
-    /**
-     * Limpar taxa de delivery do localStorage
-     */
-    window.clearDeliveryFeeFromStorage = function() {
-        const success = removeFromStorage(STORAGE_CONFIG.KEYS.DELIVERY_FEE);
-        if (success) {
-            storageLog('🚚 Taxa de delivery limpa do localStorage');
-        }
-        return success;
-    };
-    
-    // ===== FUNÇÕES DE CACHE CSV (OPCIONAL) =====
-    
-    /**
-     * Salvar cache de CSV no localStorage
-     */
-    window.saveCsvCacheToStorage = function(csvData) {
-        if (csvData) {
-            const success = saveToStorage(STORAGE_CONFIG.KEYS.CSV_CACHE, csvData);
-            if (success) {
-                storageLog('📊 Cache CSV salvo');
-            }
-            return success;
-        }
-        return false;
-    };
-    
-    /**
-     * Carregar cache de CSV do localStorage
-     */
-    window.loadCsvCacheFromStorage = function() {
-        const cachedData = loadFromStorage(STORAGE_CONFIG.KEYS.CSV_CACHE);
-        if (cachedData) {
-            storageLog('📊 Cache CSV carregado');
-            return cachedData;
-        }
-        return null;
-    };
-    // ===== FUNÇÕES DE LIMPEZA GERAL =====
-    /**
-     * Limpar todos os dados do sistema localStorage
-     */
-    window.clearAllStorageData = function() {
-        let cleared = 0;
-        
-        Object.values(STORAGE_CONFIG.KEYS).forEach(key => {
-            if (removeFromStorage(key)) {
-                cleared++;
-            }
-        });
-        
-        storageLog(`🧹 Limpeza completa: ${cleared} chaves removidas`);
-        return cleared > 0;
-    };
-    
-    /**
-     * Limpar dados expirados automaticamente
-     */
-    function cleanExpiredData() {
-        let cleaned = 0;
-        
-        Object.values(STORAGE_CONFIG.KEYS).forEach(key => {
-            try {
-                const stored = localStorage.getItem(key);
-                if (stored) {
-                    const storageData = JSON.parse(stored);
-                    if (storageData.expires && isExpired(storageData.expires)) {
-                        localStorage.removeItem(key);
-                        cleaned++;
-                        storageLog(`🧹 Dados expirados removidos: ${key}`);
-                    }
-                }
-            } catch (e) {
-                // Remove dados corrompidos
-                localStorage.removeItem(key);
-                cleaned++;
-                storageLog(`🧹 Dados corrompidos removidos: ${key}`);
-            }
-        });
-        
-        if (cleaned > 0) {
-            storageLog(`🧹 Limpeza automática: ${cleaned} itens removidos`);
-        }
-        
-        return cleaned;
-    }
-    
     /**
      * Obter estatísticas do localStorage
      */
